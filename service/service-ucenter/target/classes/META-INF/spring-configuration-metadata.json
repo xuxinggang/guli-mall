@@ -1,0 +1,42 @@
+{
+  "groups": [
+    {
+      "name": "wx.open",
+      "type": "com.xxg.eduMember.utils.ConstantPropertiesUtil",
+      "sourceType": "com.xxg.eduMember.utils.ConstantPropertiesUtil"
+    }
+  ],
+  "properties": [
+    {
+      "name": "wx.open.app-i-d",
+      "type": "java.lang.String",
+      "sourceType": "com.xxg.eduMember.utils.ConstantPropertiesUtil"
+    },
+    {
+      "name": "wx.open.app-secret",
+      "type": "java.lang.String",
+      "sourceType": "com.xxg.eduMember.utils.ConstantPropertiesUtil"
+    },
+    {
+      "name": "wx.open.redirect-url",
+      "type": "java.lang.String",
+      "sourceType": "com.xxg.eduMember.utils.ConstantPropertiesUtil"
+    },
+    {
+      "name": "wx.open.w-x-o-p-e-n-a-p-p-i-d",
+      "type": "java.lang.String",
+      "sourceType": "com.xxg.eduMember.utils.ConstantPropertiesUtil"
+    },
+    {
+      "name": "wx.open.w-x-o-p-e-n-a-p-p-s-e-c-r-e-t",
+      "type": "java.lang.String",
+      "sourceType": "com.xxg.eduMember.utils.ConstantPropertiesUtil"
+    },
+    {
+      "name": "wx.open.w-x-o-p-e-n-r-e-d-i-r-e-c-t-u-r-l",
+      "type": "java.lang.String",
+      "sourceType": "com.xxg.eduMember.utils.ConstantPropertiesUtil"
+    }
+  ],
+  "hints": []
+}
