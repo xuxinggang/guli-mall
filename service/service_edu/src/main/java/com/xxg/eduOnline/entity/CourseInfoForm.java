@@ -5,6 +5,9 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -18,6 +21,8 @@ import java.math.BigDecimal;
  */
     @ApiModel(value = "课程基本信息", description = "编辑课程基本信息的表单对象")
     @Data
+    @ConfigurationProperties(prefix = "course")
+//    @ComponentScan
     public class CourseInfoForm implements Serializable {
         private static final long serialVersionUID = 1L;
         @ApiModelProperty(value = "课程ID")

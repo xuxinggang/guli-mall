@@ -3,6 +3,7 @@ package com.xxg.eduOnline.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xxg.eduOnline.R;
+import com.xxg.eduOnline.entity.CourseInfoForm;
 import com.xxg.eduOnline.entity.EduCourse;
 import com.xxg.eduOnline.entity.EduTeacher;
 import com.xxg.eduOnline.entity.vo.*;
@@ -12,6 +13,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,10 +31,19 @@ import java.util.List;
 @RestController
 @RequestMapping("/eduService/eduCourse")
 @CrossOrigin
+@EnableConfigurationProperties(CourseInfoForm.class)
 public class EduCourseController {
 
     @Autowired
+    private CourseInfoForm courseInfoForm;
+
+    @Autowired
     private EduCourseService eduCourseService;
+
+    @RequestMapping("course")
+    public CourseInfoForm courseInfoForm(){
+        return courseInfoForm;
+    }
 
     //课程列表实现
     @PostMapping("pageCourseWrapper/{current}/{limit}")
