@@ -67,7 +67,7 @@ public class EduCommentController {
     @PostMapping("addCommit")
     public R addCommit(@RequestBody EduComment comment, HttpServletRequest request){
         String id = JwtUtils.getMemberIdByJwtToken(request);
-        System.out.println("12312312"+id);
+        System.out.println("用户id为："+id);
         if (StringUtils.isEmpty(id)){
             return R.error().message("请先登录").code(20001);
         }

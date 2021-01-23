@@ -20,6 +20,7 @@
         <module>service-msm</module>
         <module>service-ucenter</module>
         <module>service-test</module>
+        <module>service-order</module>
     </modules>
     <dependencies>
         <!--主要是引入swagger-ui测试-->

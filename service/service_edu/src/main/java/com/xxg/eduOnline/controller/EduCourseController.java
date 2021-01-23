@@ -5,13 +5,13 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xxg.eduOnline.R;
 import com.xxg.eduOnline.entity.CourseInfoForm;
 import com.xxg.eduOnline.entity.EduCourse;
-import com.xxg.eduOnline.entity.EduTeacher;
 import com.xxg.eduOnline.entity.vo.*;
 import com.xxg.eduOnline.exceptionHandler.DiyException;
 import com.xxg.eduOnline.service.EduCourseService;
+import com.xxg.eduOnline.vo.CourseOrderInfoVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.util.StringUtils;
@@ -122,6 +122,19 @@ public class EduCourseController {
         eduCourseService.removeCourseById(courseId);
         //eduCourseService.removeById(courseId);
         return R.success();
+    }
+
+    /**
+     * 根据课程id获取课程信息
+     * @param courseId
+     * @return
+     */
+    @GetMapping("{courseId}")
+    public CourseOrderInfoVo getMemberById(@PathVariable("courseId") String courseId){
+        EduCourse eduCourse = eduCourseService.getById(courseId);
+        CourseOrderInfoVo vo = new CourseOrderInfoVo();
+        BeanUtils.copyProperties(eduCourse,vo);
+        return vo;
     }
 }
 

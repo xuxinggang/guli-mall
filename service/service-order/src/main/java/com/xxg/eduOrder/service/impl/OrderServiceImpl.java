@@ -17,4 +17,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements OrderService {
 
+    @Override
+    public String createOrderInfo(String courseId, String memberIdByJwtToken) {
+        //通过使用nacos实现服务的之间的远程调用；根据以上形参获取对应的课程信息和用户信息
+        return null;
+    }
 }

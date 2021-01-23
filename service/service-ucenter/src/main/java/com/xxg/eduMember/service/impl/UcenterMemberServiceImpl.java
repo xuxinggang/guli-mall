@@ -103,4 +103,10 @@ public class UcenterMemberServiceImpl extends ServiceImpl<UcenterMemberMapper, U
         }
         return ucenterMember;
     }
+
+    @Override
+    public UcenterMember getMemberById(String memberId) {
+        UcenterMember member = baseMapper.selectById(memberId);
+        return member;
+    }
 }

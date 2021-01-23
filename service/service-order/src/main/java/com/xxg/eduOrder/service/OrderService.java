@@ -13,4 +13,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface OrderService extends IService<Order> {
 
+
+    String createOrderInfo(String courseId, String memberIdByJwtToken);
 }
