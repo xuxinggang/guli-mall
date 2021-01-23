@@ -1,15 +1,13 @@
 package com.xxg.eduOrder.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.xxg.eduOnline.R;
 import com.xxg.eduOnline.utils.JwtUtils;
+import com.xxg.eduOrder.entity.Order;
 import com.xxg.eduOrder.service.OrderService;
 import org.springframework.http.HttpRequest;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @RestController
 @RequestMapping("/eduOrder/order")
+@CrossOrigin
 public class OrderController {
 
     @Resource
@@ -39,6 +38,19 @@ public class OrderController {
         //使用JWT获取当前登录用户放在cookie中的用户id;根据订单号进行支付
         String orderId = orderService.createOrderInfo(courseId, JwtUtils.getMemberIdByJwtToken(request));
         return R.success().data("orderId",orderId);
+    }
+
+    /**
+     * 根据订单号，查询订单信息
+     * @param orderId
+     * @return
+     */
+    @GetMapping("{orderId}")
+    public R getOrderById(@PathVariable String orderId){
+        QueryWrapper<Order> wrapper = new QueryWrapper<>();
+        wrapper.lambda().eq(Order::getOrderNo,orderId);
+        Order order = orderService.getOne(wrapper);
+        return R.success().data("orderInfo",order);
     }
 
 }

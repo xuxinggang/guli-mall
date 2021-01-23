@@ -4,6 +4,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
@@ -13,7 +14,8 @@ import org.springframework.context.annotation.ComponentScan;
  * @Description:
  * @Params:
  */
-@EnableDiscoveryClient //做服务远程调用
+@EnableDiscoveryClient //服务发现
+@EnableFeignClients //服务远程调用注解
 @SpringBootApplication
 @ComponentScan("com.xxg")
 @MapperScan("com.xxg.eduOrder.mapper") //用于服务之间进行远程调用

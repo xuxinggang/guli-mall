@@ -17,6 +17,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -34,7 +35,7 @@ import java.util.List;
 @EnableConfigurationProperties(CourseInfoForm.class)
 public class EduCourseController {
 
-    @Autowired
+    @Resource
     private CourseInfoForm courseInfoForm;
 
     @Autowired
@@ -130,10 +131,10 @@ public class EduCourseController {
      * @return
      */
     @GetMapping("{courseId}")
-    public CourseOrderInfoVo getMemberById(@PathVariable("courseId") String courseId){
-        EduCourse eduCourse = eduCourseService.getById(courseId);
+    public CourseOrderInfoVo getCourseById(@PathVariable("courseId") String courseId){
+        CoursePublishVo coursePublishVo = eduCourseService.getCourseInfoById(courseId);
         CourseOrderInfoVo vo = new CourseOrderInfoVo();
-        BeanUtils.copyProperties(eduCourse,vo);
+        BeanUtils.copyProperties(coursePublishVo,vo);
         return vo;
     }
 }
