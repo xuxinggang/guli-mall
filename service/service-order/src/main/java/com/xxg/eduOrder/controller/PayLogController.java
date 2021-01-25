@@ -54,7 +54,7 @@ public class PayLogController {
                 payLogService.updateOrderStatus(map);
                 return R.success().message("订单支付成功");
             }
-            return R.success().message("订单支付中");
+            return R.success().code(25000).message("订单支付中");
 
        }
     }
