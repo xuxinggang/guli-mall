@@ -71,5 +71,11 @@ public class UcenterMemberController {
         return ucenterMemberOrderVo;
     }
 
+    @GetMapping("/dayRegisterCount/{day}")
+    public R dayRegisterCount(@PathVariable("day") String day){
+       Integer count = memberService.dayRegisterCount(day);
+       return R.success().data("dayRegisterCount",count);
+    }
+
 }
 

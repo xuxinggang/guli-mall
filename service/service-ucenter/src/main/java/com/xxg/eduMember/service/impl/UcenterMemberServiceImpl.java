@@ -15,6 +15,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.annotation.Resource;
+
 /**
  * <p>
  * 会员表 服务实现类
@@ -28,6 +30,10 @@ public class UcenterMemberServiceImpl extends ServiceImpl<UcenterMemberMapper, U
 
     @Autowired
     private RedisTemplate<String,String> redisTemplate;
+
+    @Resource
+    private UcenterMemberMapper memberMapper;
+
     @Override
     public String login(LoginVo loginVo) {
         //判断登录的账号和密码一个为空，则终止登录
@@ -108,5 +114,11 @@ public class UcenterMemberServiceImpl extends ServiceImpl<UcenterMemberMapper, U
     public UcenterMember getMemberById(String memberId) {
         UcenterMember member = baseMapper.selectById(memberId);
         return member;
+    }
+
+    @Override
+    public Integer dayRegisterCount(String day) {
+        Integer count = memberMapper.dayRegisterCount(day);
+        return count;
     }
 }
