@@ -9,8 +9,8 @@ package com.xxg.eduOnline.utils;
  */
 public class ParamUtils {
     //支付方式
-    public static Integer PAY_TYPE0_WX=0;//支付宝
-    public static Integer PAY_TYPE0_ZHB=1;//微信
+    public static Integer PAY_TYPE0_WX=1;//微信
+    public static Integer PAY_TYPE0_ZHB=2;//支付宝
 
     //支付状态
     public static Integer PAY_STATUS_0=0;//未支付

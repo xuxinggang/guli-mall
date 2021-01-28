@@ -70,10 +70,10 @@ public class UcenterMemberServiceImpl extends ServiceImpl<UcenterMemberMapper, U
             throw new DiyException(20001,"注册信息为空，请检查后重试");
         }
         //判断验证码是否和redis中的验证码一致
-        String redisCode = redisTemplate.opsForValue().get(mobile);
-        if (!code.equals(redisCode)){
-            throw new DiyException(20001,"验证码错误，请检查后重试");
-        }
+//        String redisCode = redisTemplate.opsForValue().get(mobile);
+//        if (!code.equals(redisCode)){
+//            throw new DiyException(20001,"验证码错误，请检查后重试");
+//        }
         //每个手机号只能注册一次
         QueryWrapper<UcenterMember> wrapper = new QueryWrapper<>();
         wrapper.eq("mobile",mobile);

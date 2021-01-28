@@ -1,7 +1,9 @@
 package com.xxg.eduOnline.client.impl;
 
 import com.xxg.eduMember.entity.UcenterMember;
+import com.xxg.eduOnline.R;
 import com.xxg.eduOnline.client.UcenterClient;
+import com.xxg.eduOnline.exceptionHandler.DiyException;
 import org.springframework.stereotype.Component;
 
 /**
@@ -15,6 +17,6 @@ import org.springframework.stereotype.Component;
 public class UcenterClientImpl implements UcenterClient {
     @Override
     public UcenterMember getMemberInfoById(String id) {
-        return null;
+        throw new DiyException(20001,"用户信息查询失败");
     }
 }

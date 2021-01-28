@@ -41,7 +41,8 @@ public class EduCourseController {
     @Autowired
     private EduCourseService eduCourseService;
 
-    @RequestMapping("course")
+//    @RequestMapping("course")
+//    @GetMapping("course")
     public CourseInfoForm courseInfoForm(){
         return courseInfoForm;
     }

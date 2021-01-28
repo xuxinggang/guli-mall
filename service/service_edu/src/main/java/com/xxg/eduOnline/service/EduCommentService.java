@@ -2,6 +2,7 @@ package com.xxg.eduOnline.service;
 
 import com.xxg.eduOnline.entity.EduComment;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.xxg.eduOnline.entity.vo.EduCommentVo;
 
 /**
  * <p>
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface EduCommentService extends IService<EduComment> {
 
+//    void save(EduComment comment);
 }

@@ -7,6 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  * @author xxg
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient(name="service-ucenter",fallback = UcenterClientImpl.class)
 public interface UcenterClient {
 
-    //根据用户id获取用户信息
-    @GetMapping("/eduMember/member/getMemberInfoById/{id}")
+    ////通过token字符串获取用户id获取用户信息
+    @PostMapping("/eduMember/member/getMemberInfoById/{id}")
     public UcenterMember getMemberInfoById(@PathVariable("id") String id);
 }
