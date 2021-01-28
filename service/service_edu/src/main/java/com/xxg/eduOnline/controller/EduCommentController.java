@@ -62,6 +62,7 @@ public class EduCommentController {
         if (!StringUtils.isEmpty(courseId)){
             wrapper.eq("course_id",courseId);
         }
+        //Todo: 这里的评论可以加个排序效果，查看最新的评论。以及加个删除评论的效果
         //调用分页插件，使评论分页
         commentService.page(eduCommentPage,wrapper);
         List<EduComment> commentList = eduCommentPage.getRecords();
