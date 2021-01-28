@@ -12,6 +12,7 @@ import com.xxg.eduOnline.entity.EduComment;
 import com.xxg.eduOnline.entity.EduCourse;
 import com.xxg.eduOnline.entity.vo.EduCommentVo;
 import com.xxg.eduOnline.service.EduCommentService;
+import com.xxg.eduOnline.service.EduCourseService;
 import com.xxg.eduOnline.utils.JwtUtils;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -40,25 +41,27 @@ public class EduCommentController {
      @Autowired
      private EduCommentService commentService;
 
-     @Autowired
-     private UcenterMemberService memberService;
-
      @Resource
      private UcenterClient ucenterClient;
 
+     @Resource
+     private EduCourseService eduCourseService;
+
     //根据课程id查询评论列表
     @ApiOperation(value = "评论分页列表")
-    @PostMapping("{page}/{limit}")
+    @GetMapping("{page}/{limit}")
     public R index(
                     @ApiParam(name = "page", value = "当前页码", required = true)
                             @PathVariable Long page,
                     @ApiParam(name = "limit", value = "每页记录数", required = true)
                             @PathVariable Long limit,
-                    @ApiParam(name = "courseQuery", value = "查询对象", required = false)
-                    @RequestBody(required = false) String courseId ){
+                    @ApiParam(name = "courseId", value = "查询对象", required = false)
+                    @RequestParam("courseId") String courseId){
         Page<EduComment> eduCommentPage = new Page<>(page,limit);
         QueryWrapper<EduComment> wrapper = new QueryWrapper<>();
-        wrapper.eq("course_id",courseId);
+        if (!StringUtils.isEmpty(courseId)){
+            wrapper.eq("course_id",courseId);
+        }
         //调用分页插件，使评论分页
         commentService.page(eduCommentPage,wrapper);
         List<EduComment> commentList = eduCommentPage.getRecords();
@@ -83,10 +86,11 @@ public class EduCommentController {
             return R.error().message("请先登录").code(28004);
         }
         comment.setMemberId(id);
-        UcenterClientImpl ucenterClientImpl = new UcenterClientImpl();
-        UcenterMember ucenterInfo = ucenterClientImpl.getMemberInfoById(id);
+        EduCourse course = eduCourseService.getById(comment.getCourseId());
+        UcenterMember ucenterInfo = ucenterClient.getMemberInfoById(id);
         comment.setNickname(ucenterInfo.getNickname());
         comment.setAvatar(ucenterInfo.getAvatar());
+        comment.setTeacherId(course.getTeacherId());
         commentService.save(comment);
         return R.success();
     }

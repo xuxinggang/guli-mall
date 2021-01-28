@@ -1,11 +1,14 @@
 package com.xxg.eduOnline.entity.vo;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author xxg
@@ -37,4 +40,10 @@ public class EduCommentVo implements Serializable {
 
     @ApiModelProperty(value = "评论内容")
     private String content;
+
+    @ApiModelProperty(value = "创建时间")
+    private Date gmtCreate;
+
+    @ApiModelProperty(value = "更新时间")
+    private Date gmtModified;
 }

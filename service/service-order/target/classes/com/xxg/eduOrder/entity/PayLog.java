@@ -1,11 +1,11 @@
-package com.xxg.eduOnline.entity;
+package com.xxg.eduOrder.entity;
+
+import java.math.BigDecimal;
 
 import com.baomidou.mybatisplus.annotation.*;
 
 import java.util.Date;
-
 import java.io.Serializable;
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -14,41 +14,44 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 评论
+ * 支付日志记录表
  * </p>
  *
  * @author xxg.testJava
- * @since 2020-11-17
+ * @since 2021-01-23
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="EduComment对象", description="评论")
-public class EduComment implements Serializable {
+@TableName("t_pay_log")
+@ApiModel(value="PayLog对象", description="支付日志记录表")
+public class PayLog implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "评论ID")
     @TableId(value = "id", type = IdType.ID_WORKER_STR)
     private String id;
 
-    @ApiModelProperty(value = "课程id")
-    private String courseId;
+    @ApiModelProperty(value = "订单号")
+    private String orderNo;
 
-    @ApiModelProperty(value = "讲师id")
-    private String teacherId;
+    @ApiModelProperty(value = "支付完成时间")
+    private Date payTime;
 
-    @ApiModelProperty(value = "会员id")
-    private String memberId;
+    @ApiModelProperty(value = "支付金额（分）")
+    private BigDecimal totalFee;
 
-    @ApiModelProperty(value = "会员昵称")
-    private String nickname;
+    @ApiModelProperty(value = "交易流水号")
+    private String transactionId;
 
-    @ApiModelProperty(value = "会员头像")
-    private String avatar;
+    @ApiModelProperty(value = "交易状态")
+    private String tradeState;
 
-    @ApiModelProperty(value = "评论内容")
-    private String content;
+    @ApiModelProperty(value = "支付类型（1：微信 2：支付宝）")
+    private Integer payType;
+
+    @ApiModelProperty(value = "其他属性")
+    private String attr;
 
     @ApiModelProperty(value = "逻辑删除 1（true）已删除， 0（false）未删除")
     @TableLogic

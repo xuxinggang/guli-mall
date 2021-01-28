@@ -50,7 +50,7 @@ public class UcenterMemberController {
         return R.success().data("memberInfo",member);
     }
     //通过token字符串获取用户信息
-    @PostMapping("getMemberInfoById/{id}")
+    @GetMapping("getMemberInfoById/{id}")
     public UcenterMember getMemberInfoById(@PathVariable String id){
         UcenterMember member = new UcenterMember();
         UcenterMember memberInfo = memberService.getById(id);

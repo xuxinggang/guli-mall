@@ -21,6 +21,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 public interface UcenterClient {
 
     ////通过token字符串获取用户id获取用户信息
-    @PostMapping("/eduMember/member/getMemberInfoById/{id}")
+    @GetMapping("/eduMember/member/getMemberInfoById/{id}")
     public UcenterMember getMemberInfoById(@PathVariable("id") String id);
 }

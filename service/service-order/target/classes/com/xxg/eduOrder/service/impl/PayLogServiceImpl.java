@@ -34,9 +34,6 @@ public class PayLogServiceImpl extends ServiceImpl<PayLogMapper, PayLog> impleme
     @Resource
     private OrderService orderService;
 
-//    @Resource
-//    private EduCourseService eduCourseService;
-
     @Override
     public Map<String, Object> getPatCode(String orderId) {
         try {
@@ -95,8 +92,6 @@ public class PayLogServiceImpl extends ServiceImpl<PayLogMapper, PayLog> impleme
         if (order.getStatus().intValue() ==1 ){
            return; //这个地方有疑问，如果支付状态没有成功的话，这里默认更新了支付状态了
         }
-        //TODO:支付成功之后：是不是需要更新一下购买数以及浏览记录的值也没变
-
         //更新订单状态
         order.setStatus(ParamUtils.PAY_STATUS_1);
         orderService.updateById(order);
