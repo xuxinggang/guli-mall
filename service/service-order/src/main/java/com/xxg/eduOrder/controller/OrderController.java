@@ -3,7 +3,9 @@ package com.xxg.eduOrder.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.xxg.eduOnline.R;
+import com.xxg.eduOnline.exceptionHandler.DiyException;
 import com.xxg.eduOnline.utils.JwtUtils;
+import com.xxg.eduOnline.utils.ParamUtils;
 import com.xxg.eduOrder.entity.Order;
 import com.xxg.eduOrder.service.OrderService;
 import org.springframework.http.HttpRequest;
@@ -53,5 +55,24 @@ public class OrderController {
         return R.success().data("orderInfo",order);
     }
 
+    /**
+     * 根据课程编号和用户编号查询该门课程是否已经购买
+     * @param courseId
+     * @param memberId
+     * @return
+     */
+    @GetMapping("isBuyCourse/{courseId}/{memberId}")
+    public boolean isBuyCourse(@PathVariable String courseId,@PathVariable String memberId){
+        QueryWrapper<Order> wrapper = new QueryWrapper<>();
+        wrapper.lambda().eq(Order::getCourseId,courseId);
+        wrapper.lambda().eq(Order::getMemberId,memberId);
+        wrapper.lambda().eq(Order::getStatus,ParamUtils.PAY_STATUS_1);
+        int count = orderService.count(wrapper);
+        if (count>0){
+            System.out.println("7777777777777777777777777");
+            return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
+    }
 }
 

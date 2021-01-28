@@ -16,7 +16,7 @@ import java.util.List;
  * @version 1.0
  * @date 2020/9/4 15:52
  * @Description: feign；服务发现，通过服务名来调用服务方法
- * @Params:fallback:feign调用的服务提供端的接口
+ * @Params:fallback:feign调用的服务提供端的接口服务不通时，会调用fallback下的对应的方法
  */
 @Component
 @FeignClient(name = "service-vod",fallback= vodServiceClientFeign.class) //调用vod提供的方法（消费者）
