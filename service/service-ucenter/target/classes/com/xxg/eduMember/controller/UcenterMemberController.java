@@ -7,6 +7,7 @@ import com.xxg.eduMember.entity.vo.RegisterVo;
 import com.xxg.eduMember.service.UcenterMemberService;
 import com.xxg.eduOnline.R;
 import com.xxg.eduOnline.utils.JwtUtils;
+import com.xxg.eduOnline.vo.UcenterMemberOrderVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -49,12 +50,36 @@ public class UcenterMemberController {
         return R.success().data("memberInfo",member);
     }
     //通过token字符串获取用户信息
-    @PostMapping("getMemberInfoById/{id}")
+    @GetMapping("getMemberInfoById/{id}")
     public UcenterMember getMemberInfoById(@PathVariable String id){
         UcenterMember member = new UcenterMember();
         UcenterMember memberInfo = memberService.getById(id);
         BeanUtils.copyProperties(member,memberInfo);
         return memberInfo;
+    }
+
+    /**
+     * 根据用户id获取用户信息
+     * @param memberId
+     * @return
+     */
+    @GetMapping("{memberId}")
+    public UcenterMemberOrderVo getMemberById(@PathVariable("memberId") String memberId){
+        UcenterMember member = memberService.getMemberById(memberId);
+        UcenterMemberOrderVo ucenterMemberOrderVo = new UcenterMemberOrderVo();
+        BeanUtils.copyProperties(member,ucenterMemberOrderVo);
+        return ucenterMemberOrderVo;
+    }
+
+    /**
+     * 统计注册人数，生成相应图表
+     * @param day
+     * @return
+     */
+    @GetMapping("/dayRegisterCount/{day}")
+    public R dayRegisterCount(@PathVariable("day") String day){
+       Integer count = memberService.dayRegisterCount(day);
+       return R.success().data("dayRegisterCount",count);
     }
 
 }

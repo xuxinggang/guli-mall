@@ -15,6 +15,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.annotation.Resource;
+
 /**
  * <p>
  * 会员表 服务实现类
@@ -28,6 +30,10 @@ public class UcenterMemberServiceImpl extends ServiceImpl<UcenterMemberMapper, U
 
     @Autowired
     private RedisTemplate<String,String> redisTemplate;
+
+    @Resource
+    private UcenterMemberMapper memberMapper;
+
     @Override
     public String login(LoginVo loginVo) {
         //判断登录的账号和密码一个为空，则终止登录
@@ -70,10 +76,10 @@ public class UcenterMemberServiceImpl extends ServiceImpl<UcenterMemberMapper, U
             throw new DiyException(20001,"注册信息为空，请检查后重试");
         }
         //判断验证码是否和redis中的验证码一致
-        String redisCode = redisTemplate.opsForValue().get(mobile);
-        if (!code.equals(redisCode)){
-            throw new DiyException(20001,"验证码错误，请检查后重试");
-        }
+//        String redisCode = redisTemplate.opsForValue().get(mobile);
+//        if (!code.equals(redisCode)){
+//            throw new DiyException(20001,"验证码错误，请检查后重试");
+//        }
         //每个手机号只能注册一次
         QueryWrapper<UcenterMember> wrapper = new QueryWrapper<>();
         wrapper.eq("mobile",mobile);
@@ -102,5 +108,17 @@ public class UcenterMemberServiceImpl extends ServiceImpl<UcenterMemberMapper, U
             throw new DiyException(20001,"该用户已登录");
         }
         return ucenterMember;
+    }
+
+    @Override
+    public UcenterMember getMemberById(String memberId) {
+        UcenterMember member = baseMapper.selectById(memberId);
+        return member;
+    }
+
+    @Override
+    public Integer dayRegisterCount(String day) {
+        Integer count = memberMapper.dayRegisterCount(day);
+        return count;
     }
 }

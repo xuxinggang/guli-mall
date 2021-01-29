@@ -1,10 +1,15 @@
 package com.xxg.eduStatistics.controller;
 
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.xxg.eduOnline.R;
+import com.xxg.eduStatistics.client.StatisticsClient;
+import com.xxg.eduStatistics.entity.StatisticsDaily;
+import com.xxg.eduStatistics.mapper.StatisticsDailyMapper;
+import com.xxg.eduStatistics.service.StatisticsDailyService;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
+import javax.annotation.Resource;
 
 /**
  * <p>
@@ -18,8 +23,25 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/eduStatistics/statisticsDaily")
 @CrossOrigin
 public class StatisticsDailyController {
+    
+    @Resource
+    private StatisticsDailyService statisticsDailyService;
+    
+    /**
+     * 统计某月用户注册人数，生成相应统计数据
+     * @param day
+     * @return
+     */
+      @GetMapping("/statistics/{day}")
+    public R getStatisticsByDay(@PathVariable String day){
+          //先判断统计表中是否有这一天的数据，如果有，就先删除此数据
+          QueryWrapper<StatisticsDaily> wrapper = new QueryWrapper<>();
+          wrapper.lambda().eq(StatisticsDaily::getDateCalculated,day);
+          statisticsDailyService.remove(wrapper);
 
-
+          statisticsDailyService.getStatisticsByDay(day);
+          return R.success().message("统计数据查询成功");
+      }
 
 }
 

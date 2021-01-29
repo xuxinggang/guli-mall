@@ -3,6 +3,6 @@
 <mapper namespace="com.xxg.eduMember.mapper.UcenterMemberMapper">
 
     <select id="dayRegisterCount" resultType="java.lang.Integer">
-        select  count(1) from ucenter_member um where DATA(um.gmt_create)=#{day}
+        select  count(1) from ucenter_member um where DATE(um.gmt_create)=#{day}
     </select>
 </mapper>

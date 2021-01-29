@@ -71,6 +71,11 @@ public class UcenterMemberController {
         return ucenterMemberOrderVo;
     }
 
+    /**
+     * 统计注册人数，生成相应图表
+     * @param day
+     * @return
+     */
     @GetMapping("/dayRegisterCount/{day}")
     public R dayRegisterCount(@PathVariable("day") String day){
        Integer count = memberService.dayRegisterCount(day);

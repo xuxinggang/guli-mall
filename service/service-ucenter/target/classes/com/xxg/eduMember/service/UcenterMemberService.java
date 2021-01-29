@@ -20,4 +20,8 @@ public interface UcenterMemberService extends IService<UcenterMember> {
     void register(RegisterVo registerVo);
     //根据openid进行查询，是否已经注册好了
     UcenterMember getMemberOpenId(String openid);
+
+    UcenterMember getMemberById(String memberId);
+
+    Integer dayRegisterCount(String day);
 }

@@ -7,6 +7,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * @author xxg
@@ -20,6 +21,7 @@ import org.springframework.context.annotation.ComponentScan;
 @MapperScan("com.xxg.eduStatistics.mapper")
 @EnableDiscoveryClient //开启服务发现注解
 @EnableFeignClients //开启微服务调用注解
+@EnableScheduling //定时任务开启注解
 public class StatisticsApplication {
     public static void main(String[] args) {
         SpringApplication.run(StatisticsApplication.class,args);
